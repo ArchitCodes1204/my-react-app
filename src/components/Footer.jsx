@@ -81,11 +81,11 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-blue-400" />
-                <span className="text-gray-400">support@budgetpro.com</span>
+                <span className="text-gray-400">archit0825@gmail.com</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-blue-400" />
-                <span className="text-gray-400">+1 (555) 123-4567</span>
+                <span className="text-gray-400">+(91) 63754-33304</span>
               </li>
               <li className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-blue-400" />
@@ -98,7 +98,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2025 BudgetPro. All rights reserved. | Designed with ❤️ for financial success.
+            © 2025 BudgetPro. All rights reserved. | Designed with By Archit ❤️ for financial success.
           </p>
         </div>
       </div>
