@@ -1,243 +1,159 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Target, Eye, Users } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function About() {
-  const [currentTeamIndex, setCurrentTeamIndex] = useState(0);
+const About = () => {
+  const [currentTeamMember, setCurrentTeamMember] = useState(0);
 
   const teamMembers = [
     {
-      name: 'Alex Thompson',
-      title: 'CEO & Founder',
-      bio: 'Former financial advisor with 15+ years of experience helping people achieve financial freedom.',
-      photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
-    },
-    {
-      name: 'Sarah Davis',
-      title: 'CTO & Co-Founder',
-      bio: 'Tech entrepreneur passionate about building user-friendly financial tools that make a difference.',
-      photo: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
-    },
-    {
-      name: 'Michael Rodriguez',
-      title: 'Head of Product',
-      bio: 'Product strategist focused on creating intuitive experiences that simplify complex financial concepts.',
-      photo: 'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
-    },
-    {
-      name: 'Emily Chen',
-      title: 'Head of Design',
-      bio: 'UX designer dedicated to making financial management accessible and enjoyable for everyone.',
-      photo: 'https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
-    },
-    {
-      name: 'Daniel Kim',
-      title: 'Marketing Director',
-      bio: 'Brand storyteller who thrives on crafting campaigns that connect with audiences and drive engagement.',
-      photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
-    },
-    {
       name: 'Priya Sharma',
-      title: 'Lead Developer',
-      bio: 'Full-stack developer passionate about scalable architecture and seamless user experiences.',
-      photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
+      title: 'CEO & Founder',
+      bio: 'Financial technology mein 15+ saal ka experience. Priya hamari vision lead karti hai budgeting ko sabke liye accessible banane ki.',
+      image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=300',
+    },
+    {
+      name: 'Rajesh Kumar',
+      title: 'CTO',
+      bio: 'Former TCS engineer with expertise in building scalable financial platforms aur user-centric design.',
+      image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=300',
+    },
+    {
+      name: 'Anita Patel',
+      title: 'Head of Product',
+      bio: 'Product strategist jo passionate hai intuitive experiences create karne mein jo users ko financial goals achieve karne mein help kare.',
+      image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=300',
+    },
+    {
+      name: 'Vikram Singh',
+      title: 'Head of Design',
+      bio: 'Award-winning designer jo focus karta hai beautiful, accessible interfaces create karne mein financial applications ke liye.',
+      image: 'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=300',
     },
   ];
-  
 
   const nextTeamMember = () => {
-    setCurrentTeamIndex((prev) => (prev + 1) % Math.ceil(teamMembers.length / 2));
+    setCurrentTeamMember((prev) => (prev + 1) % teamMembers.length);
   };
 
   const prevTeamMember = () => {
-    setCurrentTeamIndex((prev) => (prev - 1 + Math.ceil(teamMembers.length / 2)) % Math.ceil(teamMembers.length / 2));
+    setCurrentTeamMember((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-emerald-600 to-emerald-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="bg-gradient-to-br from-blue-600 to-purple-700 text-white py-20">
+        <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Empowering Financial 
-            <span className="text-emerald-300"> Success</span>
+            Financial <span className="text-yellow-300">Azadi</span> Ko Badhava Dena
           </h1>
-          <p className="text-xl md:text-2xl text-emerald-100 max-w-3xl mx-auto">
-            We believe in everyone deserves access to powerful financial tools that make budgeting simple, 
-            intuitive, and effective.
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            Hum believe karte hain ki har kisi ko financial clarity aur control milna chahiye.
+            Hamara mission hai budget management ko simple, intelligent, aur sabke liye accessible banana.
           </p>
         </div>
       </section>
 
       {/* Company History */}
       <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
-              <div className="space-y-6 text-lg text-gray-600">
-                <p>
-                  BudgetPro was founded in 2020 when our team of financial experts and technology veterans 
-                  recognized a gap in the market for truly user-friendly budgeting tools.
-                </p>
-                <p>
-                  After witnessing countless individuals struggle with complex financial software, we set out 
-                  to create a platform that would make budget management as simple as checking your email.
-                </p>
-                <p>
-                  Today, we're proud to serve over 100,000 users worldwide, helping them save money, 
-                  reduce financial stress, and achieve their goals.
-                </p>
-              </div>
-            </div>
-            <div>
-              <img
-                src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop"
-                alt="Company founding story"
-                className="rounded-lg shadow-lg w-full"
-              />
-            </div>
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Hamari Kahani</h2>
+          <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <p className="text-gray-600 leading-relaxed mb-6">
+              2020 mein founded, BudgetWala ek simple observation se emerge hua: traditional budgeting
+              tools ya toh everyday users ke liye bahut complex the ya meaningful insights ke liye bahut simplistic.
+              Hamare founders, jo khud personal finance management ke saath struggle kar rahe the, unhone
+              kuch different create karne ka socha.
+            </p>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              Jo weekend project ke roop mein start hua, wo jaldi hi ek comprehensive platform ban gaya jo
+              intelligent automation ko user-friendly design ke saath combine karta hai. Humne 1,00,000+
+              users ki madad ki hai apne finances ko control karne mein aur financial goals achieve karne mein.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Aaj, hum innovate aur improve karte rehte hain, hamesha apne users ki needs ko center mein
+              rakhte hue. Hamari commitment simplicity, security, aur effectiveness ke liye har decision
+              ko drive karti hai.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Mission and Vision */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Mission & Vision
-            </h2>
+      <section className="py-16 bg-gray-100">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <h3 className="text-2xl font-bold mb-6 text-blue-600">Hamara Mission</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Financial wellness ko democratize karna intelligent, intuitive tools provide karke jo
+              individuals aur families ko empower kare informed financial decisions lene mein. Hum
+              strive karte hain complexity aur anxiety ko money management se remove karne mein,
+              financial literacy ko sabke liye accessible banane mein.
+            </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Mission */}
-            <div className="bg-white rounded-lg p-8 shadow-lg">
-              <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                <Target className="h-8 w-8 text-blue-600" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-              <p className="text-lg text-gray-600">
-                To democratize financial wellness by providing accessible, intuitive tools that empower 
-                individuals to take control of their money and build a secure financial future.
-              </p>
-            </div>
-
-            {/* Vision */}
-            <div className="bg-white rounded-lg p-8 shadow-lg">
-              <div className="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-6">
-                <Eye className="h-8 w-8 text-emerald-600" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
-              <p className="text-lg text-gray-600">
-                A world where financial stress is eliminated through smart technology, where everyone has 
-                the tools and knowledge to make informed financial decisions with confidence.
-              </p>
-            </div>
+          <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <h3 className="text-2xl font-bold mb-6 text-purple-600">Hamara Vision</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Ek duniya jahan financial stress eliminate ho jaye education, automation, aur
+              intelligent insights ke through. Hum ek future envision karte hain jahan sabke paas
+              tools aur knowledge ho financial freedom achieve karne ke liye aur apni best life
+              jeene ke liye bina money worries ke.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Team Carousel */}
       <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Meet Our Team
-            </h2>
-            <p className="text-xl text-gray-600">
-              The passionate individuals behind BudgetPro
-            </p>
-          </div>
-
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Hamari Team Se Miliye</h2>
           <div className="relative">
-            <div className="flex items-center justify-between mb-8">
+            <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
+              <img
+                src={teamMembers[currentTeamMember].image}
+                alt={teamMembers[currentTeamMember].name}
+                className="w-32 h-32 rounded-full mx-auto mb-6 object-cover"
+              />
+              <h3 className="text-2xl font-bold mb-2">{teamMembers[currentTeamMember].name}</h3>
+              <p className="text-blue-600 font-medium mb-4">{teamMembers[currentTeamMember].title}</p>
+              <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                {teamMembers[currentTeamMember].bio}
+              </p>
+            </div>
+
+            {/* Carousel Controls */}
+            <div className="flex justify-center mt-8 space-x-4 items-center">
               <button
                 onClick={prevTeamMember}
-                className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow"
+                className="p-3 rounded-full bg-white shadow-lg hover:bg-gray-50 transition"
               >
-                <ChevronLeft className="h-6 w-6 text-gray-600" />
+                <ChevronLeft className="h-6 w-6" />
               </button>
+
+              <div className="flex space-x-2">
+                {teamMembers.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTeamMember(index)}
+                    className={`w-3 h-3 rounded-full ${
+                      index === currentTeamMember ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+
               <button
                 onClick={nextTeamMember}
-                className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow"
+                className="p-3 rounded-full bg-white shadow-lg hover:bg-gray-50 transition"
               >
-                <ChevronRight className="h-6 w-6 text-gray-600" />
+                <ChevronRight className="h-6 w-6" />
               </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {teamMembers.slice(currentTeamIndex * 2, (currentTeamIndex + 1) * 2).map((member, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow text-center">
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
-                  />
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
-                  <p className="text-blue-600 font-medium mb-4">{member.title}</p>
-                  <p className="text-gray-600">{member.bio}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Team Indicators */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {Array.from({ length: Math.ceil(teamMembers.length / 2) }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTeamIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === currentTeamIndex ? 'bg-blue-600' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Core Values
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">User-Centric</h3>
-              <p className="text-gray-600">
-                Every decision we make is guided by what's best for our users and their financial well-being.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Target className="h-8 w-8 text-emerald-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Simplicity</h3>
-              <p className="text-gray-600">
-                We believe in powerful tools should be simple to use, making financial management accessible to everyone.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Eye className="h-8 w-8 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Transparency</h3>
-              <p className="text-gray-600">
-                We're open about our practices, pricing, and commitment to protecting your financial data.
-              </p>
             </div>
           </div>
         </div>
       </section>
     </div>
   );
-}
+};
+
+export default About;

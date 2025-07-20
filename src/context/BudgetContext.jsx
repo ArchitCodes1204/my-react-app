@@ -1,132 +1,104 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-const BudgetContext = createContext(undefined);
+const BudgetContext = React.createContext();
 
-export function BudgetProvider({ children }) {
-  const [categories, setCategories] = useState([]);
-  const [expenses, setExpenses] = useState([]);
-  const [reminders, setReminders] = useState([]);
-
-  // Load data from localStorage on mount
-  useEffect(() => {
-    const savedCategories = localStorage.getItem('budget-categories');
-    const savedExpenses = localStorage.getItem('budget-expenses');
-    const savedReminders = localStorage.getItem('budget-reminders');
-
-    if (savedCategories) {
-      setCategories(JSON.parse(savedCategories));
-    } else {
-      // Initialize with default categories
-      const defaultCategories = [
-        { id: '1', name: 'Food & Dining', budget: 500, color: '#EF4444', icon: 'UtensilsCrossed' },
-        { id: '2', name: 'Transportation', budget: 300, color: '#3B82F6', icon: 'Car' },
-        { id: '3', name: 'Entertainment', budget: 200, color: '#8B5CF6', icon: 'Gamepad2' },
-        { id: '4', name: 'Utilities', budget: 400, color: '#10B981', icon: 'Zap' },
-      ];
-      setCategories(defaultCategories);
-    }
-
-    if (savedExpenses) {
-      setExpenses(JSON.parse(savedExpenses));
-    }
-
-    if (savedReminders) {
-      setReminders(JSON.parse(savedReminders));
-    }
-  }, []);
-
-  // Save to localStorage whenever data changes
-  useEffect(() => {
-    localStorage.setItem('budget-categories', JSON.stringify(categories));
-  }, [categories]);
-
-  useEffect(() => {
-    localStorage.setItem('budget-expenses', JSON.stringify(expenses));
-  }, [expenses]);
-
-  useEffect(() => {
-    localStorage.setItem('budget-reminders', JSON.stringify(reminders));
-  }, [reminders]);
-
-  const addCategory = (category) => {
-    const newCategory = { ...category, id: Date.now().toString() };
-    setCategories((prev) => [...prev, newCategory]);
-  };
-
-  const updateCategory = (id, updates) => {
-    setCategories((prev) => prev.map((cat) => (cat.id === id ? { ...cat, ...updates } : cat)));
-  };
-
-  const deleteCategory = (id) => {
-    setCategories((prev) => prev.filter((cat) => cat.id !== id));
-    setExpenses((prev) => prev.filter((exp) => exp.categoryId !== id));
-    setReminders((prev) => prev.filter((rem) => rem.categoryId !== id));
-  };
-
-  const addExpense = (expense) => {
-    const newExpense = { ...expense, id: Date.now().toString() };
-    setExpenses((prev) => [...prev, newExpense]);
-  };
-
-  const deleteExpense = (id) => {
-    setExpenses((prev) => prev.filter((exp) => exp.id !== id));
-  };
-
-  const addReminder = (reminder) => {
-    const newReminder = { ...reminder, id: Date.now().toString() };
-    setReminders((prev) => [...prev, newReminder]);
-  };
-
-  const deleteReminder = (id) => {
-    setReminders((prev) => prev.filter((rem) => rem.id !== id));
-  };
-
-  const getCategoryExpenses = (categoryId) => {
-    return expenses.filter((expense) => expense.categoryId === categoryId);
-  };
-
-  const getCategoryTotal = (categoryId) => {
-    return expenses
-      .filter((expense) => expense.categoryId === categoryId)
-      .reduce((total, expense) => total + expense.amount, 0);
-  };
-
-  const getTotalBudget = () => {
-    return categories.reduce((total, category) => total + category.budget, 0);
-  };
-
-  const getTotalSpent = () => {
-    return expenses.reduce((total, expense) => total + expense.amount, 0);
-  };
-
-  return (
-    <BudgetContext.Provider
-      value={{
-        categories,
-        expenses,
-        reminders,
-        addCategory,
-        updateCategory,
-        deleteCategory,
-        addExpense,
-        deleteExpense,
-        addReminder,
-        deleteReminder,
-        getCategoryExpenses,
-        getCategoryTotal,
-        getTotalBudget,
-        getTotalSpent,
-      }}
-    >
-      {children}
-    </BudgetContext.Provider>
-  );
-}
-
-export function useBudget() {
+export const useBudget = () => {
   const context = useContext(BudgetContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useBudget must be used within a BudgetProvider');
   }
   return context;
-}
+};
+
+export const BudgetProvider = ({ children }) => {
+  const [categories, setCategories] = useState([
+    { id: '1', name: 'Food & Groceries', budget: 15000, spent: 8500, color: '#3B82F6' },
+    { id: '2', name: 'Transportation', budget: 8000, spent: 6200, color: '#10B981' },
+    { id: '3', name: 'Entertainment', budget: 5000, spent: 6500, color: '#F59E0B' },
+    { id: '4', name: 'Utilities & Bills', budget: 12000, spent: 11200, color: '#EF4444' },
+    { id: '5', name: 'Healthcare', budget: 7000, spent: 3200, color: '#8B5CF6' },
+  ]);
+
+  const [expenses, setExpenses] = useState([
+    { id: '1', categoryId: '1', amount: 450, description: 'Grocery shopping at Big Bazaar', date: '2024-01-15' },
+    { id: '2', categoryId: '2', amount: 280, description: 'Petrol refill', date: '2024-01-14' },
+    { id: '3', categoryId: '3', amount: 800, description: 'Movie tickets at PVR', date: '2024-01-13' },
+    { id: '4', categoryId: '4', amount: 2500, description: 'Electricity bill', date: '2024-01-12' },
+    { id: '5', categoryId: '5', amount: 1200, description: 'Doctor consultation', date: '2024-01-11' },
+  ]);
+
+  const [reminders, setReminders] = useState([]);
+
+  const addCategory = (category) => {
+    const newCategory = {
+      ...category,
+      id: Date.now().toString(),
+      spent: 0,
+    };
+    setCategories(prev => [...prev, newCategory]);
+  };
+
+  const addExpense = (expense) => {
+    const newExpense = {
+      ...expense,
+      id: Date.now().toString(),
+    };
+    setExpenses(prev => [...prev, newExpense]);
+
+    setCategories(prev => prev.map(cat =>
+      cat.id === expense.categoryId
+        ? { ...cat, spent: cat.spent + expense.amount }
+        : cat
+    ));
+  };
+
+  const addReminder = (reminder) => {
+    const newReminder = {
+      ...reminder,
+      id: Date.now().toString(),
+    };
+    setReminders(prev => [...prev, newReminder]);
+  };
+
+  const deleteCategory = (id) => {
+    setCategories(prev => prev.filter(cat => cat.id !== id));
+    setExpenses(prev => prev.filter(exp => exp.categoryId !== id));
+  };
+
+  const deleteExpense = (id) => {
+    const expense = expenses.find(exp => exp.id === id);
+    if (expense) {
+      setCategories(prev => prev.map(cat =>
+        cat.id === expense.categoryId
+          ? { ...cat, spent: Math.max(0, cat.spent - expense.amount) }
+          : cat
+      ));
+    }
+    setExpenses(prev => prev.filter(exp => exp.id !== id));
+  };
+
+  const deleteReminder = (id) => {
+    setReminders(prev => prev.filter(rem => rem.id !== id));
+  };
+
+  const getAlertsCount = () => {
+    return categories.filter(cat => cat.spent > cat.budget).length;
+  };
+
+  return (
+    <BudgetContext.Provider value={{
+      categories,
+      expenses,
+      reminders,
+      addCategory,
+      addExpense,
+      addReminder,
+      deleteCategory,
+      deleteExpense,
+      deleteReminder,
+      getAlertsCount,
+    }}>
+      {children}
+    </BudgetContext.Provider>
+  );
+};

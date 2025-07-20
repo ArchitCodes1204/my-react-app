@@ -1,250 +1,217 @@
 import React, { useState } from 'react';
-import { ChevronUp, ChevronDown, User, Calendar, Mail } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, User } from 'lucide-react';
 
-export default function Blog() {
-  const [visibleBlogs, setVisibleBlogs] = useState(6);
-  const [email, setEmail] = useState('');
+const Blog = () => {
+  const [currentBlogSet, setCurrentBlogSet] = useState(0);
 
   const blogPosts = [
     {
-      title: '10 Simple Ways to Start Budgeting Today',
-      description: 'Learn the fundamentals of budgeting with these easy-to-follow strategies that anyone can implement immediately.',
-      image: 'https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
+      title: '10 Essential Budgeting Tips for Beginners',
+      description: 'Master the basics of personal finance with these proven strategies that will set you up for financial success.',
       author: 'Sarah Johnson',
-      date: 'March 15, 2025',
-      category: 'Budgeting Basics'
+      date: '2024-01-15',
+      image: 'https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=400',
+      category: 'Budgeting Basics',
     },
     {
-      title: 'The Psychology of Spending: Understanding Your Money Habits',
-      description: 'Discover the psychological factors that influence your spending decisions and learn how to build better financial habits.',
-      image: 'https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      author: 'Dr. Michael Chen',
-      date: 'March 12, 2025',
-      category: 'Financial Psychology'
+      title: 'How to Create an Emergency Fund That Actually Works',
+      description: 'Learn the step-by-step process to build a robust emergency fund that will protect you from unexpected expenses.',
+      author: 'Mike Chen',
+      date: '2024-01-12',
+      image: 'https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg?auto=compress&cs=tinysrgb&w=400',
+      category: 'Emergency Planning',
     },
     {
-      title: 'Emergency Fund 101: Building Your Financial Safety Net',
-      description: 'Step-by-step guide to building an emergency fund that will protect you from unexpected financial challenges.',
-      image: 'https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      author: 'Emily Rodriguez',
-      date: 'March 10, 2025',
-      category: 'Emergency Planning'
+      title: 'The Psychology of Spending: Why We Overspend',
+      description: 'Understand the mental triggers that lead to overspending and learn practical strategies to overcome them.',
+      author: 'Emily Davis',
+      date: '2024-01-10',
+      image: 'https://images.pexels.com/photos/4386327/pexels-photo-4386327.jpeg?auto=compress&cs=tinysrgb&w=400',
+      category: 'Psychology',
     },
     {
-      title: 'Smart Strategies for Paying Off Debt Faster',
-      description: 'Proven methods to accelerate your debt payoff and save thousands in interest payments.',
-      image: 'https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      author: 'David Miller',
-      date: 'March 8, 2025',
-      category: 'Debt Management'
+      title: 'Investment Strategies for Young Professionals',
+      description: 'Start your investment journey with confidence using these time-tested strategies designed for career starters.',
+      author: 'David Wilson',
+      date: '2024-01-08',
+      image: 'https://images.pexels.com/photos/4386366/pexels-photo-4386366.jpeg?auto=compress&cs=tinysrgb&w=400',
+      category: 'Investing',
     },
     {
-      title: 'Investing on a Budget: Getting Started with $100',
-      description: 'Learn how to begin your investment journey even with limited funds and build wealth over time.',
-      image: 'https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      author: 'Jennifer Park',
-      date: 'March 5, 2025',
-      category: 'Investing'
+      title: 'Debt-Free Living: A Complete Roadmap',
+      description: 'Transform your financial life with our comprehensive guide to eliminating debt and building wealth.',
+      author: 'Sarah Johnson',
+      date: '2024-01-05',
+      image: 'https://images.pexels.com/photos/4386245/pexels-photo-4386245.jpeg?auto=compress&cs=tinysrgb&w=400',
+      category: 'Debt Management',
     },
     {
-      title: 'Side Hustles That Actually Make Money in 2025',
-      description: 'Explore legitimate side hustle opportunities that can boost your income and accelerate your financial goals.',
-      image: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      author: 'Alex Thompson',
-      date: 'March 3, 2025',
-      category: 'Income Generation'
+      title: 'Smart Technology for Personal Finance',
+      description: 'Discover the latest fintech tools and apps that can revolutionize how you manage your money.',
+      author: 'Mike Chen',
+      date: '2024-01-03',
+      image: 'https://images.pexels.com/photos/4386373/pexels-photo-4386373.jpeg?auto=compress&cs=tinysrgb&w=400',
+      category: 'Technology',
     },
-    {
-      title: 'Meal Planning to Save Money: A Complete Guide',
-      description: 'Cut your grocery bill in half with strategic meal planning and smart shopping techniques.',
-      image: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      author: 'Maria Garcia',
-      date: 'March 1, 2025',
-      category: 'Money Saving'
-    },
-    {
-      title: 'Teaching Kids About Money: Age-Appropriate Lessons',
-      description: 'Essential financial lessons to teach children at every age to set them up for future success.',
-      image: 'https://images.pexels.com/photos/5849579/pexels-photo-5849579.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      author: 'Robert Kim',
-      date: 'February 28, 2025',
-      category: 'Financial Education'
-    },
-    {
-      title: 'The Art of Negotiating Better Deals and Saving Money',
-      description: 'Master the art of negotiation to reduce your bills and get better deals on everything you buy.',
-      image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      author: 'Lisa Wong',
-      date: 'February 25, 2025',
-      category: 'Money Saving'
-    }
   ];
 
-  const loadMoreBlogs = () => {
-    setVisibleBlogs(prev => Math.min(prev + 3, blogPosts.length));
+  const blogsPerPage = 3;
+  const maxSets = Math.ceil(blogPosts.length / blogsPerPage);
+
+  const nextBlogSet = () => {
+    setCurrentBlogSet((prev) => (prev + 1) % maxSets);
   };
 
-  const showLessBlogs = () => {
-    setVisibleBlogs(6);
+  const prevBlogSet = () => {
+    setCurrentBlogSet((prev) => (prev - 1 + maxSets) % maxSets);
   };
 
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    alert('Thank you for subscribing to our newsletter!');
-    setEmail('');
+  const getCurrentBlogs = () => {
+    const start = currentBlogSet * blogsPerPage;
+    return blogPosts.slice(start, start + blogsPerPage);
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-orange-600 to-orange-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="bg-gradient-to-br from-purple-600 to-blue-700 text-white py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Financial Wisdom
-            <span className="text-orange-300"> & Insights</span>
+            Financial Wisdom & <span className="text-yellow-300">Expert Insights</span>
           </h1>
-          <p className="text-xl md:text-2xl text-orange-100 max-w-3xl mx-auto">
-            Expert advice, practical tips, and inspiring stories to help you master your money and achieve financial freedom.
+          <p className="text-xl text-purple-100 max-w-3xl mx-auto">
+            Stay informed with the latest trends, tips, and strategies in personal finance and budgeting.
           </p>
         </div>
       </section>
 
-      {/* Blog Posts Grid */}
+      {/* Blog Posts Carousel */}
       <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Latest Articles
-            </h2>
-            <p className="text-xl text-gray-600">
-              Stay updated with the latest financial tips and strategies
-            </p>
-          </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Latest Articles</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.slice(0, visibleBlogs).map((post, index) => (
-              <article key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-medium text-orange-600 bg-orange-100 px-2 py-1 rounded-full">
-                      {post.category}
-                    </span>
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {post.date}
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {getCurrentBlogs().map((post, index) => (
+                <article key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200">
+                  <div className="relative">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                        {post.category}
+                      </span>
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">
-                    {post.description}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <User className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-600">{post.author}</span>
+
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-3 line-clamp-2">{post.title}</h3>
+                    <p className="text-gray-600 mb-4 line-clamp-3">{post.description}</p>
+
+                    <div className="flex items-center justify-between text-sm text-gray-500">
+                      <div className="flex items-center space-x-2">
+                        <User className="h-4 w-4" />
+                        <span>{post.author}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Calendar className="h-4 w-4" />
+                        <span>{new Date(post.date).toLocaleDateString()}</span>
+                      </div>
                     </div>
-                    <button className="text-orange-600 hover:text-orange-700 font-medium text-sm">
-                      Read More →
+
+                    <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                      Read More
                     </button>
                   </div>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
 
-          {/* Load More/Show Less Buttons */}
-          <div className="text-center mt-12">
-            {visibleBlogs < blogPosts.length ? (
+            <div className="flex justify-center mt-8 space-x-4">
               <button
-                onClick={loadMoreBlogs}
-                className="inline-flex items-center px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors"
+                onClick={prevBlogSet}
+                className="p-3 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors"
               >
-                <ChevronDown className="h-5 w-5 mr-2" />
-                Load More Articles
+                <ChevronLeft className="h-6 w-6" />
               </button>
-            ) : visibleBlogs > 6 ? (
+
+              <div className="flex space-x-2 items-center">
+                {Array.from({ length: maxSets }, (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentBlogSet(index)}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      index === currentBlogSet ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+
               <button
-                onClick={showLessBlogs}
-                className="inline-flex items-center px-6 py-3 bg-gray-600 text-white rounded-lg font-semibold hover:bg-gray-700 transition-colors"
+                onClick={nextBlogSet}
+                className="p-3 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors"
               >
-                <ChevronUp className="h-5 w-5 mr-2" />
-                Show Less
+                <ChevronRight className="h-6 w-6" />
               </button>
-            ) : null}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-white rounded-lg p-8 shadow-lg">
-            <Mail className="h-12 w-12 text-orange-600 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Stay Updated with Financial Tips
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Subscribe to our newsletter and get the latest financial insights, budgeting tips, 
-              and money-saving strategies delivered straight to your inbox.
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+            <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p className="text-blue-100 mb-8 text-lg">
+              Get the latest financial tips and insights delivered directly to your inbox.
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto">
+
+            <form className="max-w-md mx-auto">
               <div className="flex flex-col sm:flex-row gap-4">
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  required
+                  className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors whitespace-nowrap"
+                  className="px-6 py-3 bg-yellow-400 text-gray-900 rounded-lg font-semibold hover:bg-yellow-300 transition-colors duration-200"
                 >
-                  Subscribe Now
+                  Subscribe
                 </button>
               </div>
+              <p className="text-blue-100 text-sm mt-4">
+                No spam, unsubscribe at any time. Your privacy is our priority.
+              </p>
             </form>
-            <p className="text-sm text-gray-500 mt-4">
-              No spam, unsubscribe at any time. We respect your privacy.
-            </p>
           </div>
         </div>
       </section>
 
       {/* Featured Categories */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Explore Topics
-            </h2>
-            <p className="text-xl text-gray-600">
-              Find articles by category that interest you most
-            </p>
-          </div>
-
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Popular Topics</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {['Budgeting Basics', 'Debt Management', 'Investing', 'Money Saving', 'Financial Education', 'Income Generation'].map((category, index) => (
-              <button
-                key={index}
-                className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-lg hover:border-orange-200 transition-all"
-              >
-                <span className="text-sm font-medium text-gray-700 hover:text-orange-600">
-                  {category}
-                </span>
-              </button>
-            ))}
+            {['Budgeting Basics', 'Emergency Planning', 'Psychology', 'Investing', 'Debt Management', 'Technology'].map(
+              (category, index) => (
+                <button
+                  key={index}
+                  className="bg-white rounded-lg p-4 text-center hover:shadow-lg transition-shadow duration-200"
+                >
+                  <span className="font-medium text-gray-700">{category}</span>
+                </button>
+              )
+            )}
           </div>
         </div>
       </section>
     </div>
   );
-}
+};
+
+export default Blog;
