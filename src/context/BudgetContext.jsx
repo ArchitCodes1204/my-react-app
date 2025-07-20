@@ -84,21 +84,36 @@ export const BudgetProvider = ({ children }) => {
   const getAlertsCount = () => {
     return categories.filter(cat => cat.spent > cat.budget).length;
   };
+  const getTotalBudget = () =>
+    categories.reduce((total, cat) => total + cat.budget, 0);
+  
+  const getTotalSpent = () =>
+    categories.reduce((total, cat) => total + cat.spent, 0);
+  
+  const getCategoryTotal = (categoryId) => {
+    const cat = categories.find((c) => c.id === categoryId);
+    return cat ? cat.spent : 0;
+  };
+  
 
   return (
-    <BudgetContext.Provider value={{
-      categories,
-      expenses,
-      reminders,
-      addCategory,
-      addExpense,
-      addReminder,
-      deleteCategory,
-      deleteExpense,
-      deleteReminder,
-      getAlertsCount,
-    }}>
-      {children}
-    </BudgetContext.Provider>
+<BudgetContext.Provider value={{
+  categories,
+  expenses,
+  reminders,
+  addCategory,
+  addExpense,
+  addReminder,
+  deleteCategory,
+  deleteExpense,
+  deleteReminder,
+  getAlertsCount,
+  getTotalBudget,
+  getTotalSpent,
+  getCategoryTotal,
+}}>
+  {children}
+</BudgetContext.Provider>
+
   );
 };
