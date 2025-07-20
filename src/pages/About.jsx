@@ -29,7 +29,20 @@ export default function About() {
       bio: 'UX designer dedicated to making financial management accessible and enjoyable for everyone.',
       photo: 'https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
     },
+    {
+      name: 'Daniel Kim',
+      title: 'Marketing Director',
+      bio: 'Brand storyteller who thrives on crafting campaigns that connect with audiences and drive engagement.',
+      photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
+    },
+    {
+      name: 'Priya Sharma',
+      title: 'Lead Developer',
+      bio: 'Full-stack developer passionate about scalable architecture and seamless user experiences.',
+      photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop',
+    },
   ];
+  
 
   const nextTeamMember = () => {
     setCurrentTeamIndex((prev) => (prev + 1) % Math.ceil(teamMembers.length / 2));
@@ -49,7 +62,7 @@ export default function About() {
             <span className="text-emerald-300"> Success</span>
           </h1>
           <p className="text-xl md:text-2xl text-emerald-100 max-w-3xl mx-auto">
-            We believe everyone deserves access to powerful financial tools that make budgeting simple, 
+            We believe in everyone deserves access to powerful financial tools that make budgeting simple, 
             intuitive, and effective.
           </p>
         </div>
@@ -209,7 +222,7 @@ export default function About() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Simplicity</h3>
               <p className="text-gray-600">
-                We believe powerful tools should be simple to use, making financial management accessible to everyone.
+                We believe in powerful tools should be simple to use, making financial management accessible to everyone.
               </p>
             </div>
 
